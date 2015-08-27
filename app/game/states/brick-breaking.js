@@ -1,15 +1,19 @@
 import Brick from '../sprites/brick';
+import Paddle from '../sprites/paddle';
 import Croissant from '../sprites/croissant';
 
 /*global Phaser */
 export default class {
   constructor(game) {
     this.game = game;
+    this.numBricksInRow = 9,
+    this.numRows = 5;
   }
 
   preload() {
     this.game.time.advancedTiming = true;
     this.game.load.image('brick', 'assets/images/brick.png');
+    this.game.load.image('paddle', 'assets/images/paddle.png');
     this.game.load.image('croissant', 'assets/images/croissant.png');
   }
 
@@ -17,31 +21,38 @@ export default class {
     this.addLevelText();
     this.addBricks();
     this.addCroissant();
+    this.addPaddle();
   }
 
   addCroissant() {
     this.croissant = new Croissant(this.game);
   }
 
+  addPaddle() {
+    this.paddle = new Paddle(this.game);
+    this.game.input.addMoveCallback(this.movePaddle, this);
+  }
+
   addBricks() {
-    let offset = 8,
-    brickWidth = 16,
-    brickHeight = 8,
-    numBricksInRow = 9,
-    numRows = 5;
+    let numBricks = this.numRows * this.numBricksInRow
 
     this.bricks = this.game.add.group();
 
-    for (let i = 0; i < numRows * numBricksInRow; i++) {
-      var row = Math.floor(i/numBricksInRow);
-      var col = i % numBricksInRow;
-
-      let brick = new Brick(this.game,
-                            offset + col * brickWidth,
-                            2 * offset + row * brickHeight);
+    for (let i = 0; i < numBricks; i++) {
+      let row = this.rowForBrickIndex(i),
+      col = this.colForBrickIndex(i),
+      brick = new Brick(this.game, row, col);
 
       this.bricks.add(brick);
     }
+  }
+
+  rowForBrickIndex(i) {
+    return Math.floor(i / this.numBricksInRow);
+  }
+
+  colForBrickIndex(i) {
+    return i % this.numBricksInRow;
   }
 
   addLevelText() {
@@ -63,12 +74,24 @@ export default class {
   }
 
   brickCollision(croissant, brick) {
-    console.log(brick);
     brick.destroy();
+  }
+
+  paddleCollision(croissant, paddle) {
+    console.log('pong!');
   }
 
   update() {
     this.game.physics.arcade.collide(this.croissant, this.bricks, this.brickCollision);
+    this.game.physics.arcade.collide(this.croissant, this.paddle, this.paddleCollision);
+  }
+
+  render() {
+    this.game.debug.text(this.game.time.fps || '--', 2, 14, "#00ff00");
+  }
+
+  movePaddle(pointer, x, y) {
+    this.paddle.x += this.game.input.mouse.event.movementX;
   }
 }
 

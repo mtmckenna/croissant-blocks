@@ -1,9 +1,18 @@
 /*global Phaser */
 export default class extends Phaser.Sprite {
-  constructor(game, x = 0, y = 0) {
-    super(game, x, y, 'brick');
+  constructor(game, row, col) {
+    super(game, 0, 0, 'brick');
+    this.configurePosition(row, col);
     this.configurePhysics();
     game.add.existing(this);
+  }
+
+  configurePosition(row, col) {
+    let sideOffset = 8,
+    topOffset = 2 * sideOffset;
+
+    this.x = sideOffset + col * this.width;
+    this.y = topOffset + row * this.height;
   }
 
   configurePhysics() {

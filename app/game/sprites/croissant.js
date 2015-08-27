@@ -1,7 +1,7 @@
 /*global Phaser */
 export default class extends Phaser.Sprite {
   constructor(game, x = 0, y = 0) {
-    super(game, x, y, 'croissant');
+    super(game, game.world.centerX, game.world.centerY, 'croissant');
     this.configurePhysics();
     game.add.existing(this);
   }
