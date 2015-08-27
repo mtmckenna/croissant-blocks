@@ -6,7 +6,7 @@ import Croissant from '../sprites/croissant';
 export default class {
   constructor(game) {
     this.game = game;
-    this.numBricksInRow = 9,
+    this.numBricksInRow = 9;
     this.numRows = 5;
   }
 
@@ -34,7 +34,7 @@ export default class {
   }
 
   addBricks() {
-    let numBricks = this.numRows * this.numBricksInRow
+    let numBricks = this.numRows * this.numBricksInRow;
 
     this.bricks = this.game.add.group();
 
@@ -77,7 +77,7 @@ export default class {
     brick.destroy();
   }
 
-  paddleCollision(croissant, paddle) {
+  paddleCollision() {
     console.log('pong!');
   }
 
@@ -90,7 +90,7 @@ export default class {
     this.game.debug.text(this.game.time.fps || '--', 2, 14, "#00ff00");
   }
 
-  movePaddle(pointer, x, y) {
+  movePaddle() {
     this.paddle.x += this.game.input.mouse.event.movementX;
   }
 }
