@@ -5,6 +5,7 @@ export default class extends Phaser.Sprite {
     this.configurePosition();
     this.configurePhysics();
     game.add.existing(this);
+    this.configureInput();
   }
 
   configurePosition() {
@@ -19,6 +20,12 @@ export default class extends Phaser.Sprite {
     this.body.immovable = true;
     this.body.collideWorldBounds = true;
     this.body.bounce.setTo(0.0, 0.0);
+  }
+
+  configureInput() {
+    this.inputEnabled = true;
+    this.input.enableDrag(true);
+    this.input.allowVerticalDrag = false;
   }
 }
 

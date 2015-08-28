@@ -30,7 +30,6 @@ export default class {
 
   addPaddle() {
     this.paddle = new Paddle(this.game);
-    this.game.input.addMoveCallback(this.movePaddle, this);
   }
 
   addBricks() {
@@ -88,10 +87,6 @@ export default class {
 
   render() {
     this.game.debug.text(this.game.time.fps || '--', 2, 14, "#00ff00");
-  }
-
-  movePaddle() {
-    this.paddle.x += this.game.input.mouse.event.movementX;
   }
 }
 
