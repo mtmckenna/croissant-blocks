@@ -27,7 +27,7 @@ export default Ember.Component.extend({
 
   preload: function() {
     window.game = this.game;
-    //this.game.load.crossOrigin = 'Anonymous';
+    this.game.load.crossOrigin = 'Anonymous';
   },
 
   create: function() {
