@@ -86,8 +86,8 @@ export default class {
     this.game.physics.arcade.collide(this.croissant, this.paddle, this.paddleCollision);
   }
 
-  render() {
+  /*render() {
     this.game.debug.text(this.game.time.fps || '--', 2, 14, "#00ff00");
-  }
+  }*/
 }
 
