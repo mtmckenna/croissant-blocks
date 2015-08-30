@@ -58,17 +58,17 @@ export default class {
     var text = this.game.add.text(this.game.world.centerX,
                                   this.game.world.centerY,
                                   '1',
-                                  this.spaceTextStyle());
+                                  this.levelTextStyle());
 
     text.anchor.setTo(0.5, 0.5);
     this.game.add.tween(text.scale).from({ x: 0.0, y: 0.0 }, 500, Phaser.Easing.Quadratic.In, true, 1000);
     this.game.add.tween(text).from({ angle: 180 }, 500, Phaser.Easing.Quadratic.In, true, 1000);
   }
 
-  spaceTextStyle() {
+  levelTextStyle() {
     return  {
       font: '100px Sans-Serif',
-      fill: '#d3d3d3'
+      fill: '#fff'
     };
   }
 
