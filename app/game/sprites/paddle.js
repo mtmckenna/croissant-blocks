@@ -9,9 +9,13 @@ export default class extends Phaser.Sprite {
   }
 
   configurePosition() {
-    let bottomOffset = 16;
-    this.anchor.setTo(0.5, 0.0);
+    this.anchor.setTo(0.5, 0.5);
     this.x = this.game.world.centerX;
+    this.setYPosition();
+  }
+
+  setYPosition() {
+    let bottomOffset = 48;
     this.y = this.game.world.height - bottomOffset;
   }
 
@@ -24,8 +28,12 @@ export default class extends Phaser.Sprite {
 
   configureInput() {
     this.inputEnabled = true;
-    this.input.enableDrag(true);
     this.input.allowVerticalDrag = false;
+    this.input.enableDrag(true);
+  }
+
+  update() {
+    this.setYPosition();
   }
 }
 
