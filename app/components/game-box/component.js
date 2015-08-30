@@ -4,20 +4,27 @@ import BrickBreaking from '../../game/states/brick-breaking';
 /*global Phaser */
 
 export default Ember.Component.extend({
+  actions: {
+    toggleMenu: function() {
+      this.toggleProperty('showingMenu');
+      this.game.paused = this.get('showingMenu');
+    }
+  },
 
   didInsertElement: function() {
-    this.game = new Phaser.Game(160,
-                                284,
-                                Phaser.AUTO,
-                                'phaser-crophrendber',
-                                {
-                                  preload: this.preload.bind(this),
-                                  create: this.create.bind(this)
-                                },
-                                null,
-                                false,
-                                false);
+    let game = new Phaser.Game(160,
+                               284,
+                               Phaser.AUTO,
+                               'phaser-crophrendber',
+                               {
+                                 preload: this.preload.bind(this),
+                                 create: this.create.bind(this)
+                               },
+                               null,
+                               false,
+                               false);
 
+    this.set('game', game);
     this.addStates();
   },
 
@@ -36,5 +43,7 @@ export default Ember.Component.extend({
     this.game.scale.pageAlignHorizontally = true;
     this.game.scale.pageAlignVeritcally = true;
     this.game.state.start('brick-breaking');
-  }
+  },
+
+  showingMenu: false
 });

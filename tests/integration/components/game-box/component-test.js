@@ -5,22 +5,12 @@ moduleForComponent('game-box', 'Integration | Component | game box', {
   integration: true
 });
 
-test('it renders', function(assert) {
-  assert.expect(2);
-
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
-
+test('clicking on the hamburger opens the menu', function(assert) {
   this.render(hbs`{{game-box}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(this.$().find('.game-menu').length, 0);
 
-  // Template block usage:
-  this.render(hbs`
-    {{#game-box}}
-      template block text
-    {{/game-box}}
-  `);
+  this.$().find('.game-menu-button').click();
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().find('.game-menu').length, 1);
 });

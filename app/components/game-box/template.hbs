@@ -1,1 +1,11 @@
+{{#unless showingMenu}}
+<a href="#" {{action "toggleMenu"}} class="game-menu-button">
+  {{fa-icon "bars"}}
+</a>
+{{/unless}}
+
+{{#if showingMenu}}
+  {{game-menu toggleMenu='toggleMenu'}}
+{{/if}}
+
 {{yield}}

@@ -2,3 +2,22 @@ body {
   background: #666;
   margin: 0;
 }
+
+.game-menu-button, .game-menu-close {
+  position: fixed;
+  right: 10px;
+  top: 10px;
+  color: #fff;
+  background: none;
+  border: none;
+  font-size: 20px;
+}
+
+.game-menu {
+  position: absolute;
+  background-color: rgba(102,102,102,.8);
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
