@@ -29,7 +29,7 @@ export default Ember.Component.extend({
   },
 
   addStates: function() {
-    this.game.state.add('brick-breaking', new BrickBreaking(this.game));
+    this.game.state.add('brick-breaking', new BrickBreaking(this.game, this.get('level')));
   },
 
   preload: function() {

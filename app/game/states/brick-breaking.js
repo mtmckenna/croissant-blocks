@@ -4,10 +4,11 @@ import Croissant from '../sprites/croissant';
 
 /*global Phaser */
 export default class {
-  constructor(game) {
+  constructor(game, level) {
     this.game = game;
     this.numBricksInRow = 9;
     this.numRows = 5;
+    this.level = level;
   }
 
   preload() {
@@ -57,12 +58,12 @@ export default class {
   addLevelText() {
     var text = this.game.add.text(this.game.world.centerX,
                                   this.game.world.centerY,
-                                  '1',
+                                  this.level,
                                   this.levelTextStyle());
 
     text.anchor.setTo(0.5, 0.5);
-    this.game.add.tween(text.scale).from({ x: 0.0, y: 0.0 }, 500, Phaser.Easing.Quadratic.In, true, 1000);
-    this.game.add.tween(text).from({ angle: 180 }, 500, Phaser.Easing.Quadratic.In, true, 1000);
+    this.game.add.tween(text.scale).from({ x: 0.0, y: 0.0 }, 500, Phaser.Easing.Quadratic.In, true, 500);
+    this.game.add.tween(text).from({ angle: 180 }, 500, Phaser.Easing.Quadratic.In, true, 500);
   }
 
   levelTextStyle() {

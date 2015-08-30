@@ -6,6 +6,9 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.route('play', function() {
+    this.route('level', { path: ':level_id' });
+  });
 });
 
 export default Router;
