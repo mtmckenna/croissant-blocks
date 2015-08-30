@@ -8,8 +8,8 @@ export default class extends Phaser.Sprite {
   }
 
   configurePosition(row, col) {
-    let sideOffset = 8,
-    topOffset = 2 * sideOffset;
+    let sideOffset = 16,
+    topOffset = 16;
 
     this.x = sideOffset + col * this.width;
     this.y = topOffset + row * this.height;

@@ -6,7 +6,7 @@ import Croissant from '../sprites/croissant';
 export default class {
   constructor(game, level) {
     this.game = game;
-    this.numBricksInRow = 9;
+    this.numBricksInRow = 8;
     this.numRows = 5;
     this.level = level;
   }
