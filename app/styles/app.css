@@ -1,6 +1,8 @@
 body {
   background: #666;
   margin: 0;
+  font-family: 'sans-serif';
+  color: #fff;
 }
 
 .game-menu-button, .game-menu-close {

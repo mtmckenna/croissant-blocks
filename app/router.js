@@ -6,6 +6,7 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.route('intro-screen', { path: '/' });
   this.route('play', function() {
     this.route('level', { path: ':level_id' });
   });

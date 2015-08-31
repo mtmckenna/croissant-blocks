@@ -24,6 +24,7 @@ export default class {
     this.addBricks();
     this.addCroissant();
     this.addPaddle();
+    this.game.scale.windowConstraints.bottom = "visual";
   }
 
   addCroissant() {
