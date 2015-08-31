@@ -5,7 +5,7 @@
 {{/unless}}
 
 {{#if showingMenu}}
-  {{game-menu toggleMenu='toggleMenu'}}
+  {{game-menu toggleMenu='toggleMenu' changeBall='changeBall' selectedBall=currentBall}}
 {{/if}}
 
 {{yield}}

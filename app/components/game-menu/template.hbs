@@ -2,10 +2,19 @@
   {{fa-icon "close"}}
 </a>
 
-<ul>
-  <li>Audio Enabled</li>
-  <li>Croissant</li>
-  <li>Contact</li>
+<ul class="menu-options">
+  <li>
+Enable audio: <input type="checkbox" name="audio-enabled" value="enabled" />
+</li>
+
+<li>
+Ball type:
+<select onchange={{action "changeBall" value="target.selectedIndex"}} >
+  {{#each ballOptions as |item|}}
+    <option selected={{eq item selectedBall}} value={{item}}>{{item}}</option>
+  {{/each}}
+</select>
+</li>
 </ul>
 
 {{yield}}

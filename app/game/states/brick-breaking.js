@@ -16,6 +16,7 @@ export default class {
     this.game.load.image('brick', 'assets/images/brick.png');
     this.game.load.image('paddle', 'assets/images/paddle.png');
     this.game.load.image('croissant', 'assets/images/croissant.png');
+    this.game.load.image('basketball', 'assets/images/basketball.png');
   }
 
   create() {
@@ -78,12 +79,20 @@ export default class {
   }
 
   paddleCollision() {
-    console.log('pong!');
+    this.croissant.increaseSpeed(this.level);
+  }
+
+  changeBall(ballName) {
+    this.croissant.loadTexture(ballName);
+  }
+
+  currentBall() {
+    return this.croissant.key;
   }
 
   update() {
     this.game.physics.arcade.collide(this.croissant, this.bricks, this.brickCollision);
-    this.game.physics.arcade.collide(this.croissant, this.paddle, this.paddleCollision);
+    this.game.physics.arcade.collide(this.croissant, this.paddle, this.paddleCollision, null, this);
   }
 
   /*render() {

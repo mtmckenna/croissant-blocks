@@ -14,6 +14,12 @@ export default class extends Phaser.Sprite {
     this.body.velocity.y = 75;
   }
 
+  increaseSpeed(level) {
+    let speedMultiplier = level / 100 + 1;
+    this.body.velocity.x *= speedMultiplier;
+    this.body.velocity.y *= speedMultiplier;
+  }
+
   update() {
     super.update();
   }

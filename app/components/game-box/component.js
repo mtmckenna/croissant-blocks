@@ -8,6 +8,11 @@ export default Ember.Component.extend({
     toggleMenu: function() {
       this.toggleProperty('showingMenu');
       this.game.paused = this.get('showingMenu');
+    },
+
+    changeBall: function(ball) {
+      this.brickBreaking.changeBall(ball);
+      this.set('currentBall', ball);
     }
   },
 
@@ -29,7 +34,8 @@ export default Ember.Component.extend({
   },
 
   addStates: function() {
-    this.game.state.add('brick-breaking', new BrickBreaking(this.game, this.get('level')));
+    this.brickBreaking = this.game.state.add('brick-breaking', new BrickBreaking(this.game, this.get('level')));
+    this.set('currentBall', this.brickBreaking.currentBall());
   },
 
   preload: function() {
