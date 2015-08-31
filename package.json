@@ -1,7 +1,7 @@
 {
-  "name": "crophrendber",
+  "name": "croissant-blocks",
   "version": "0.0.0",
-  "description": "Small description for crophrendber goes here",
+  "description": "Small description for croissant-blocks goes here",
   "private": true,
   "directories": {
     "doc": "doc",

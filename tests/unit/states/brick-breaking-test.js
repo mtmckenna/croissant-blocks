@@ -1,12 +1,12 @@
 import { test } from 'ember-qunit';
-import BrickBreaking from 'crophrendber/game/states/brick-breaking';
+import BrickBreaking from 'croissant-blocks/game/states/brick-breaking';
 
 /*global Phaser */
 
 let game = new Phaser.Game(160,
                             284,
                             Phaser.AUTO,
-                            'phaser-test-crophrendber');
+                            'phaser-test-croissant-blocks');
 
 
 test('#rowForBrickIndex - first row', function(assert) {

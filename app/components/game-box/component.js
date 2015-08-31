@@ -20,7 +20,7 @@ export default Ember.Component.extend({
     let game = new Phaser.Game(160,
                                284,
                                Phaser.AUTO,
-                               'phaser-crophrendber',
+                               'phaser-croissant-blocks',
                                {
                                  preload: this.preload.bind(this),
                                  create: this.create.bind(this)
@@ -35,7 +35,6 @@ export default Ember.Component.extend({
 
   addStates: function() {
     this.brickBreaking = this.game.state.add('brick-breaking', new BrickBreaking(this.game, this.get('level')));
-    this.set('currentBall', this.brickBreaking.currentBall());
   },
 
   preload: function() {
