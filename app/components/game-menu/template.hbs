@@ -4,12 +4,12 @@
 
 <ul class="menu-options">
   <li>
-Enable audio: <input type="checkbox" name="audio-enabled" value="enabled" />
+Enable audio <input type="checkbox" name="audio-enabled" value="enabled" />
 </li>
 
 <li>
-Ball type:
-<select onchange={{action "changeBall" value="target.selectedIndex"}} >
+Ball type
+<select onchange={{action "changeBall" value="target.selectedIndex"}} class="form-control input-lg ball-select">
   {{#each ballOptions as |item|}}
     <option selected={{eq item selectedBall}} value={{item}}>{{item}}</option>
   {{/each}}

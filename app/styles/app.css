@@ -29,3 +29,8 @@ body {
   font-size: 40px;
   list-style: none;
 }
+
+.ball-select {
+  display: inline;
+  width: auto;
+}
