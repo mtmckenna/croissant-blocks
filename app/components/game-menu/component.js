@@ -14,7 +14,18 @@ export default Ember.Component.extend({
 
   ballText: Ember.computed('selectedBall', {
     get: function() {
-      return `Play as ${this.get('selectedBall')}`;
+      return `Play as ${this.get('nextBall')}`;
+    }
+  }),
+
+  nextBall: Ember.computed('selectedBall', {
+    get: function() {
+      let options = this.get('ballOptions');
+      let index = options.indexOf(this.get('selectedBall')) + 1;
+
+      if (index >= options.length) { index = 0; }
+
+      return this.get('ballOptions')[index];
     }
   }),
 
@@ -29,13 +40,7 @@ export default Ember.Component.extend({
     },
 
     changeBall: function() {
-      let options = this.get('ballOptions');
-      let index = options.indexOf(this.get('selectedBall')) + 1;
-
-      if (index >= options.length) { index = 0; }
-
-      let ball = this.get('ballOptions')[index];
-
+      let ball = this.get('nextBall');
       this.set('selectedBall', ball);
       this.sendAction('changeBall', ball);
     }
