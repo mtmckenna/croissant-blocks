@@ -22,7 +22,6 @@ module.exports = function(defaults) {
   // along with the exports of each module as its value.
 
   app.import('bower_components/phaser/build/phaser.js');
-  app.import('vendor/js/webfontloader.js');
   app.import('vendor/css/animate.css');
 
   return app.toTree();
