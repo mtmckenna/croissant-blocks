@@ -41,6 +41,9 @@ export default Ember.Component.extend({
                                false);
 
     this.set('game', game);
+
+    window.game = game;
+
     this.addStates();
   },
 
@@ -49,10 +52,9 @@ export default Ember.Component.extend({
   },
 
   preload: function() {
-    window.game = this.game;
     this.game.load.crossOrigin = 'Anonymous';
     this.game.load.script('webfont', '/assets/js/webfontloader.js');
-    this.configureWebFonts();
+    //this.configureWebFonts();
   },
 
   create: function() {
@@ -60,6 +62,7 @@ export default Ember.Component.extend({
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
     this.game.scale.pageAlignHorizontally = true;
     this.game.scale.pageAlignVeritcally = true;
+    this.game.state.start('brick-breaking');
   },
 
   configureWebFonts() {
