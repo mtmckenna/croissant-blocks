@@ -7,6 +7,7 @@ export default Ember.Component.extend({
 
   currentBall: 'croissant',
   audioEnabled: false,
+  showingMenu: false,
 
   actions: {
     toggleMenu: function() {
@@ -50,6 +51,7 @@ export default Ember.Component.extend({
   preload: function() {
     window.game = this.game;
     this.game.load.crossOrigin = 'Anonymous';
+    this.configureWebFonts();
   },
 
   create: function() {
@@ -60,5 +62,18 @@ export default Ember.Component.extend({
     this.game.state.start('brick-breaking');
   },
 
-  showingMenu: false
+  configureWebFonts() {
+    console.log('config');
+    window.WebFontConfig = {
+      custom: {
+        families: ['VT323'],
+        urls: ['/assets/croissant-blocks.css']
+      },
+      active: () => {
+        console.log('ready');
+        //this.game.state.start('copyright-screen');
+        //this.game.state.start('town');
+      }
+    };
+  }
 });
