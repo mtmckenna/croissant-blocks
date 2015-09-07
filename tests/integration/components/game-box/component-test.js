@@ -10,7 +10,7 @@ test('clicking on the hamburger opens the menu', function(assert) {
 
   assert.equal(this.$().find('.game-menu').length, 0);
 
-  this.$().find('.game-menu-button').click();
+  this.$().find('.game-menu-hamburger').click();
 
   assert.equal(this.$().find('.game-menu').length, 1);
 });

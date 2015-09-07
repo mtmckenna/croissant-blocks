@@ -4,15 +4,25 @@ import BrickBreaking from '../../game/states/brick-breaking';
 /*global Phaser */
 
 export default Ember.Component.extend({
+
+  currentBall: 'croissant',
+  audioEnabled: false,
+
   actions: {
     toggleMenu: function() {
       this.toggleProperty('showingMenu');
       this.game.paused = this.get('showingMenu');
     },
 
+    toggleAudio: function(enabled) {
+      this.set('audioEnabled', enabled);
+      this.brickBreaking.toggleAudio(enabled);
+    },
+
+
     changeBall: function(ball) {
-      this.brickBreaking.changeBall(ball);
       this.set('currentBall', ball);
+      this.brickBreaking.changeBall(ball);
     }
   },
 
@@ -34,7 +44,7 @@ export default Ember.Component.extend({
   },
 
   addStates: function() {
-    this.brickBreaking = this.game.state.add('brick-breaking', new BrickBreaking(this.game, this.get('level')));
+    this.brickBreaking = this.game.state.add('brick-breaking', new BrickBreaking(this.game, this.get('level'), this.get('currentBall')));
   },
 
   preload: function() {

@@ -4,11 +4,12 @@ import Croissant from '../sprites/croissant';
 
 /*global Phaser */
 export default class {
-  constructor(game, level) {
+  constructor(game, level, initialBall) {
     this.game = game;
     this.numBricksInRow = 8;
     this.numRows = 5;
     this.level = level;
+    this.initialBall = initialBall;
   }
 
   preload() {
@@ -21,14 +22,14 @@ export default class {
 
   create() {
     this.addLevelText();
-    this.addBricks();
     this.addCroissant();
+    this.addBricks();
     this.addPaddle();
     this.game.scale.windowConstraints.bottom = "visual";
   }
 
   addCroissant() {
-    this.croissant = new Croissant(this.game);
+    this.croissant = new Croissant(this.game, this.initialBall);
   }
 
   addPaddle() {

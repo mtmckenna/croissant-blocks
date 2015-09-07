@@ -1,11 +1,11 @@
 {{#unless showingMenu}}
-<a href="#" {{action "toggleMenu"}} class="game-menu-button">
+<a href="#" {{action "toggleMenu"}} class="game-menu-hamburger">
   {{fa-icon "bars"}}
 </a>
 {{/unless}}
 
 {{#if showingMenu}}
-  {{game-menu toggleMenu='toggleMenu' changeBall='changeBall' selectedBall=currentBall}}
+  {{game-menu toggleMenu='toggleMenu' changeBall='changeBall' selectedBall=currentBall audioEnabled=audioEnabled}}
 {{/if}}
 
 <div id='phaser-croissant-blocks'></div>

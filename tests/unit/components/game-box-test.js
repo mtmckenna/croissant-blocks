@@ -7,7 +7,6 @@ test('opening the menu pauses the game', function(assert) {
   var component = this.subject();
   component.didInsertElement();
 
-  component.set('showingMenu', false);
   assert.equal(component.game.paused, false);
 
   component.send('toggleMenu');

@@ -32,7 +32,7 @@ test('#colForBrickIndex - first col', function(assert) {
 
 test('#colForBrickIndex - second col', function(assert) {
   let brickBreaking = new BrickBreaking(game);
-  let col = brickBreaking.colForBrickIndex(10);
+  let col = brickBreaking.colForBrickIndex(9);
 
   assert.equal(col, 1);
 });

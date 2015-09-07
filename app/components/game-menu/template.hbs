@@ -1,20 +1,14 @@
-<a href="#" {{action "toggleMenu"}} class="game-menu-button">
+<a href="#" {{action "toggleMenu"}} class="game-menu-hamburger">
   {{fa-icon "close"}}
 </a>
 
 <ul class="menu-options">
   <li>
-Enable audio <input type="checkbox" name="audio-enabled" value="enabled" />
-</li>
-
-<li>
-Ball type
-<select onchange={{action "changeBall" value="target.selectedIndex"}} class="form-control input-lg ball-select">
-  {{#each ballOptions as |item|}}
-    <option selected={{eq item selectedBall}} value={{item}}>{{item}}</option>
-  {{/each}}
-</select>
-</li>
+  <div class="game-menu-button" {{action "toggleAudio"}}>{{audioText}}</div>
+  </li>
+  <li>
+  <div class="game-menu-button" {{action "changeBall"}}>{{ballText}}</div>
+  </li>
 </ul>
 
 {{yield}}

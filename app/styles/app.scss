@@ -5,7 +5,7 @@ body {
   color: #fff;
 }
 
-.game-menu-button, .game-menu-close {
+.game-menu-hamburger {
   position: fixed;
   right: 10px;
   top: 10px;
@@ -13,6 +13,20 @@ body {
   background: none;
   border: none;
   font-size: 20px;
+}
+
+.game-menu-button {
+  width: 100%;
+  background-color: #969696;
+  text-decoration: none;
+  font-size: 50px;
+  text-align: center;
+
+  &:active, &:hover {
+    cursor: pointer;
+    background-color: #AFAFAF;
+    text-decoration: none;
+  }
 }
 
 .game-menu {
@@ -25,9 +39,18 @@ body {
 }
 
 .menu-options {
+  padding: 0;
   color: #fff;
   font-size: 40px;
   list-style: none;
+
+  li {
+    border-bottom: 1px solid #AFAFAF;
+  }
+
+  li:last-child {
+    border-bottom: none;
+  }
 }
 
 .ball-select {
