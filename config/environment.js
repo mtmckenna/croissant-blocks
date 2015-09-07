@@ -17,6 +17,7 @@ module.exports = function(environment) {
       'img-src': "'self' data: 'unsafe-inline'",
       'style-src': "'self' 'unsafe-inline'",
       'font-src': "'self'",
+      'script-src': "'self' 'unsafe-inline'"
     },
 
     APP: {

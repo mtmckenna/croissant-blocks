@@ -51,6 +51,7 @@ export default Ember.Component.extend({
   preload: function() {
     window.game = this.game;
     this.game.load.crossOrigin = 'Anonymous';
+    this.game.load.script('webfont', '/assets/js/webfontloader.js');
     this.configureWebFonts();
   },
 
@@ -59,20 +60,16 @@ export default Ember.Component.extend({
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
     this.game.scale.pageAlignHorizontally = true;
     this.game.scale.pageAlignVeritcally = true;
-    this.game.state.start('brick-breaking');
   },
 
   configureWebFonts() {
-    console.log('config');
     window.WebFontConfig = {
       custom: {
         families: ['VT323'],
         urls: ['/assets/croissant-blocks.css']
       },
       active: () => {
-        console.log('ready');
-        //this.game.state.start('copyright-screen');
-        //this.game.state.start('town');
+        this.game.state.start('brick-breaking');
       }
     };
   }
