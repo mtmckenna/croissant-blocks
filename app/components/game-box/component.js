@@ -58,16 +58,22 @@ export default Ember.Component.extend({
   },
 
   addStates: function() {
-    let level = this.get('level');
-    let levelName = `brick-breaking-level-${level}`;
+    let levelName = `brick-breaking-level-${this.get('level')}`;
 
-    if (this.brickBreaking) {
-      this.game.state.clearCurrentState();
-      this.game.state.remove(this.game.state.current);
+    if (this.game.state.current !== levelName) {
+      this.clearCurrentLevel(levelName);
+      this.startNewLevel(levelName);
     }
 
-    this.brickBreaking = this.game.state.add(levelName, new BrickBreaking(this.game, level, this.get('currentBall')));
+  },
 
+  clearCurrentLevel(levelName) {
+    this.game.state.clearCurrentState();
+    this.game.state.remove(this.game.state.current);
+  },
+
+  startNewLevel(levelName) {
+    this.brickBreaking = this.game.state.add(levelName, new BrickBreaking(this.game, this.get('level'), this.get('currentBall')));
     this.brickBreaking.targetObject = this;
     window.brickBreaking = this.brickBreaking;
 
