@@ -26,10 +26,18 @@ export default class {
     this.addBricks();
     this.addPaddle();
     this.game.scale.windowConstraints.bottom = "visual";
+    this.addCountdown();
   }
 
   addCroissant() {
     this.croissant = new Croissant(this.game, this.initialBall);
+  }
+
+  releaseCroissant() {
+    let maxInitSpeed = 75;
+    let plusOrMinus = Math.random() < 0.5 ? -1 : 1;
+    this.croissant.body.velocity.y = maxInitSpeed;
+    this.croissant.body.velocity.x = plusOrMinus * Math.floor(Math.random() * maxInitSpeed) + 1;
   }
 
   addPaddle() {
@@ -58,26 +66,63 @@ export default class {
     return i % this.numBricksInRow;
   }
 
+  addCountdown() {
+    let timer = this.game.time.create(false);
+    var countdown = 3;
+    this.addCountdownText(countdown);
+
+    timer.repeat(1000, 3, function() {
+      countdown -= 1;
+      this.addCountdownText(countdown);
+    }, this);
+
+    timer.start();
+
+    timer.onComplete.add(function() {
+      this.addCountdownText('Croissant!');
+      this.releaseCroissant();
+    }, this);
+  }
+
+  addCountdownText(countdown) {
+    if (countdown <= 0) { return; }
+
+    let text = this.game.add.text(this.game.world.centerX,
+                                  this.game.world.centerY,
+                                  countdown,
+                                  this.levelTextStyle());
+
+      text.anchor.setTo(0.5, 0.5);
+
+      this.game.add.tween(text.scale).from({ x: 0.0, y: 0.0 }, 500, Phaser.Easing.Quadratic.In, true);
+      this.game.add.tween(text).from({ angle: 180 }, 500, Phaser.Easing.Quadratic.In, true);
+
+      let timer = this.game.time.create(false);
+      timer.add(1000, function() { text.destroy(); });
+      timer.start();
+  }
+
   addLevelText() {
     var text = this.game.add.text(this.game.world.centerX,
-                                  this.game.world.centerY,
-                                  this.level,
+                                  this.game.world.height - 20,
+                                  `Level ${this.level}`,
                                   this.levelTextStyle());
 
     text.anchor.setTo(0.5, 0.5);
-    this.game.add.tween(text.scale).from({ x: 0.0, y: 0.0 }, 500, Phaser.Easing.Quadratic.In, true, 500);
-    this.game.add.tween(text).from({ angle: 180 }, 500, Phaser.Easing.Quadratic.In, true, 500);
+    text.alpha = 0;
+    this.game.add.tween(text).to( { alpha: 1 }, 1000, Phaser.Easing.Linear.None, true);
   }
 
   levelTextStyle() {
     return  {
-      font: '100px Sans-Serif',
+      font: '25px VT323',
       fill: '#fff'
     };
   }
 
   brickCollision(croissant, brick) {
     brick.destroy();
+    this.checkIfWon();
   }
 
   paddleCollision() {
@@ -92,9 +137,22 @@ export default class {
     return this.croissant.key;
   }
 
+  checkIfDead() {
+    if (this.croissant.body.y >= this.game.world.height - this.croissant.body.height) {
+      console.log('dead');
+    }
+  }
+
+  checkIfWon() {
+    if (this.bricks.length <= 0) {
+      console.log('victory');
+    }
+  }
+
   update() {
-    this.game.physics.arcade.collide(this.croissant, this.bricks, this.brickCollision);
+    this.game.physics.arcade.collide(this.croissant, this.bricks, this.brickCollision, null, this);
     this.game.physics.arcade.collide(this.croissant, this.paddle, this.paddleCollision, null, this);
+    this.checkIfDead();
   }
 
   /*render() {
