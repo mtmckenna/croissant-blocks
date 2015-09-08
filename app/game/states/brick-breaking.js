@@ -7,7 +7,7 @@ export default class {
   constructor(game, level, initialBall) {
     this.game = game;
     this.numBricksInRow = 8;
-    this.numRows = 5;
+    this.numRows = 4;
     this.level = level;
     this.initialBall = initialBall;
   }
@@ -139,13 +139,13 @@ export default class {
 
   checkIfDead() {
     if (this.croissant.body.y >= this.game.world.height - this.croissant.body.height) {
-      console.log('dead');
+      this.targetObject.send('playerDied');
     }
   }
 
   checkIfWon() {
     if (this.bricks.length <= 0) {
-      console.log('victory');
+      this.targetObject.send('playerWon');
     }
   }
 

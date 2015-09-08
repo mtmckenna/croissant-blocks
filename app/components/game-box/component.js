@@ -20,14 +20,20 @@ export default Ember.Component.extend({
       this.brickBreaking.toggleAudio(enabled);
     },
 
-
     changeBall: function(ball) {
       this.set('currentBall', ball);
       this.brickBreaking.changeBall(ball);
+    },
+
+    playerWon: function() {
+      this.sendAction('goToNextLevel');
+    },
+
+    playerDied: function() {
     }
   },
 
-  didInsertElement: function() {
+  didInsertElement() {
     let game = new Phaser.Game(160,
                                284,
                                Phaser.AUTO,
@@ -44,17 +50,34 @@ export default Ember.Component.extend({
 
     window.game = game;
 
+  },
+
+  didRender: function() {
+    if (!this.game.state.current) { return; }
     this.addStates();
   },
 
   addStates: function() {
-    this.brickBreaking = this.game.state.add('brick-breaking', new BrickBreaking(this.game, this.get('level'), this.get('currentBall')));
+    let level = this.get('level');
+    let levelName = `brick-breaking-level-${level}`;
+
+    if (this.brickBreaking) {
+      this.game.state.clearCurrentState();
+      this.game.state.remove(this.game.state.current);
+    }
+
+    this.brickBreaking = this.game.state.add(levelName, new BrickBreaking(this.game, level, this.get('currentBall')));
+
+    this.brickBreaking.targetObject = this;
+    window.brickBreaking = this.brickBreaking;
+
+    this.game.state.start(levelName);
   },
 
   preload: function() {
     this.game.load.crossOrigin = 'Anonymous';
     this.game.load.script('webfont', '/assets/js/webfontloader.js');
-    //this.configureWebFonts();
+    this.configureWebFonts();
   },
 
   create: function() {
@@ -62,7 +85,6 @@ export default Ember.Component.extend({
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
     this.game.scale.pageAlignHorizontally = true;
     this.game.scale.pageAlignVeritcally = true;
-    this.game.state.start('brick-breaking');
   },
 
   configureWebFonts() {
@@ -72,7 +94,7 @@ export default Ember.Component.extend({
         urls: ['/assets/croissant-blocks.css']
       },
       active: () => {
-        this.game.state.start('brick-breaking');
+        this.addStates();
       }
     };
   }

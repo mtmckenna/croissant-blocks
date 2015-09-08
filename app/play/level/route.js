@@ -2,6 +2,14 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model(params) {
-    return params.level_id;
+    return parseInt(params.level_id);
+  },
+
+  actions: {
+    goToNextLevel: function() {
+      let nextLevel = this.currentModel + 1;
+      console.log(`route ${nextLevel}`);
+      this.transitionTo('play.level', nextLevel);
+    }
   }
 });
