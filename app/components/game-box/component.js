@@ -30,6 +30,7 @@ export default Ember.Component.extend({
     },
 
     playerDied: function() {
+      this.game.state.restart();
     }
   },
 

@@ -8,7 +8,6 @@ export default Ember.Route.extend({
   actions: {
     goToNextLevel: function() {
       let nextLevel = this.currentModel + 1;
-      console.log(`route ${nextLevel}`);
       this.transitionTo('play.level', nextLevel);
     }
   }
